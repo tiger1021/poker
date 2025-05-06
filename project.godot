@@ -12,8 +12,13 @@ config_version=5
 
 config/name="poker"
 run/main_scene="res://board/board.tscn"
-config/features=PackedStringArray("4.3", "GL Compatibility")
+config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [rendering]
 
