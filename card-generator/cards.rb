@@ -27,9 +27,9 @@ card_width = 250
         card_background.draw(card)
 
         identifier = Magick::Draw.new
-        card.annotate(identifier, 0,0,10,0, value.to_s) do
-            identifier.gravity = Magick::NorthWestGravity # Text positioning
-            identifier.pointsize = 120 # Font size
+        card.annotate(identifier, 0,0,0,0, value.to_s) do
+            identifier.gravity = Magick::CenterGravity # Text positioning
+            identifier.pointsize = 200 # Font size
             if (index%2 == 0)
                 identifier.fill = "Red"
             else
@@ -42,9 +42,21 @@ card_width = 250
             
         end
 
-        card.annotate(identifier, 0,0,10,0, suit) do
+        card.annotate(identifier, 0,0,10,-10, suit) do
             identifier.gravity = Magick::SouthEastGravity # Text positioning
-            identifier.pointsize = 110 # Font size
+            identifier.pointsize = 120 # Font size
+            if (index%2 == 0)
+                identifier.fill = "Red"
+            else
+                identifier.fill = "Black"
+            end
+            identifier.font = "ShipporiMinchoB1-Bold"
+            identifier.font_weight = 900
+            identifier.interline_spacing = 0
+        end
+        card.annotate(identifier, 0,0,10,-25, suit) do
+            identifier.gravity = Magick::NorthWestGravity # Text positioning
+            identifier.pointsize = 120 # Font size
             if (index%2 == 0)
                 identifier.fill = "Red"
             else

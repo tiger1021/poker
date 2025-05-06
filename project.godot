@@ -11,12 +11,17 @@ config_version=5
 [application]
 
 config/name="poker"
-run/main_scene="uid://r6vb5qkpulal"
+run/main_scene="uid://dvqpmvp1vaqg1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/scale_mode="integer"
 
 [rendering]

@@ -1,4 +1,4 @@
-class_name Slot extends Sprite2D
+class_name Slot extends TextureRect
 
 @export var card:Card
 @export var column:int
@@ -10,7 +10,12 @@ func _ready() -> void:
 	
 func load_texture() -> void:
 	var fstring = "res://cards/pngs/%s.png"
-	var card_texture = load(fstring % self.card.display_name())
+	var card_texture
+	if self.card:
+		card_texture = load(fstring % self.card.display_name())
+	else:
+		card_texture =  load("res://cards/pngs/blank.png")
+
 	texture = card_texture
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
