@@ -11,13 +11,12 @@ config_version=5
 [application]
 
 config/name="poker"
-run/main_scene="res://board/board.tscn"
+run/main_scene="uid://r6vb5qkpulal"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [display]
 
-window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [rendering]
