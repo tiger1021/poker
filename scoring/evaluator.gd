@@ -6,17 +6,20 @@ func evaluate_hand(hand) -> int:
 	var valid = true
 	var is_straight = true
 	var is_flush = false
-	
+	var pairs = 0
+	var triplet = 0
+	var quad = 0
 	var multiples = {}
 	var suits = {}
+	
 	for index in hand.size():
 		var card = hand[index]
 		if (card==null):
 			valid = false
 			break
 		else:
-			if (multiples.find_key(card.value) == null):
-				multiples[card.value] = 0
+			if (multiples.get(card.value) == null):
+				multiples[card.value] = 1
 			else:
 				multiples[card.value] = multiples[card.value] + 1
 			suits[card.suit] = 1
@@ -25,12 +28,28 @@ func evaluate_hand(hand) -> int:
 		value = 0
 	
 	if (suits.keys().size() == 1):
-		is_flush = true
 		value = scoring_table["Flush"]
 	
-	if (multiples.keys().size() > 1):
-		print("Has multiples")
-			
+	for multiple in multiples.values():
+		if multiple == 2:
+			pairs += 1
+		if multiple == 3:
+			triplet = 1
+		if multiple == 4:
+			quad = 1
+	
+	if pairs == 1:
+		if triplet == 1:
+			value = scoring_table["Full House"]
+		else:
+			value = scoring_table["One Pair"]
+	elif pairs == 2:
+		value = scoring_table["Two Pair"]
+	else:
+		if triplet == 1:
+			value = scoring_table["Three of a Kind"]
+	if quad == 1:
+		value = scoring_table["Four of a Kind"]
 	return value
 
 func sort_hand_ascending(a, b):
@@ -57,5 +76,6 @@ func _ready() -> void:
 	"Three of a Kind": 200,
 	"Two Pair": 100,
 	"One Pair": 50,
-	"Invalid Hand": 0
+	"Invalid Hand": 0,
+	"Flush Bonus": 50
 }
