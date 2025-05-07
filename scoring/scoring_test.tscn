@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dourlabe3s1pb"]
+
+[ext_resource type="Script" uid="uid://bahfyanjjlgc2" path="res://scoring/scoring_test.gd" id="1_gplbl"]
+
+[node name="ScoringTest" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_gplbl")
