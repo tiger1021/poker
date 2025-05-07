@@ -56,7 +56,7 @@ func start_new_drop() -> void:
 
 func generate_card_for_cell(grid_cell:GridCell) -> void:
 	var suits = ["♦","♠","♥", "♣"]
-	var possible_values = [1,2,3,4,5,6,7,8,9,10,11,12,13]
+	var possible_values = [2,3,4,5,6,7,8,9,10,11,12,13,14]
 	var card = Card.new()
 	card.suit = suits.pick_random()
 	card.value = possible_values.pick_random()
