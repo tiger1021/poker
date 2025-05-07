@@ -85,7 +85,7 @@ func move_right() -> void:
 			set_active_cell(next_cell)
 	
 func move_left() -> void:
-	if (active_cell.column > (1)):
+	if (active_cell.column > (0)):
 		var next_cell = grid_array[active_cell.row][active_cell.column - 1]
 		if (next_cell.card == null):
 			set_active_cell(next_cell)
