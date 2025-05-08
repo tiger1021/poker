@@ -11,10 +11,11 @@ func evaluate_hand(hand) -> int:
 	var quad = 0
 	var multiples = {}
 	var suits = {}
-	
+
 	for index in hand.size():
 		var card = hand[index]
 		if (card==null):
+			is_straight = false
 			valid = false
 			break
 		else:
@@ -23,12 +24,25 @@ func evaluate_hand(hand) -> int:
 			else:
 				multiples[card.value] = multiples[card.value] + 1
 			suits[card.suit] = 1
+			if index < 4:
+				if hand[index].value != (hand[index+1].value - 1):
+					is_straight = false
 			
 	if (valid==false):
 		value = 0
 	
 	if (suits.keys().size() == 1):
+		is_flush = true
 		value = scoring_table["Flush"]
+	
+	if is_straight == true:
+		if is_flush == true:
+			if (hand[0].value == 10):
+				value = scoring_table["Royal Flush"]
+			else:
+				value = scoring_table["Straight Flush"]
+		else:
+			value = scoring_table["Straight"]
 	
 	for multiple in multiples.values():
 		if multiple == 2:

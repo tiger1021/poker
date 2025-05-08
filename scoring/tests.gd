@@ -1,4 +1,4 @@
-extends CenterContainer
+extends TextEdit
 
 var evaluator = Evaluator.new()
 var suits = ["♦","♠","♥", "♣"]
@@ -6,17 +6,19 @@ var suits = ["♦","♠","♥", "♣"]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
-	print("Starting Tests")
+	self.text += "Starting Tests\n"
 	
 	for hand in hands:
-		print(hand)
-		print(hands[hand]["hand"])
+		self.text += hand
+		self.text += "\n"
+		self.text += " ".join(hands[hand]["hand"])
+		self.text += "\n"
 		var score = evaluator.evaluate_hand(create_hand_from_text(hands[hand]["hand"]))
 		if (score == evaluator.scoring_table[hand]):
-			print("Success")
+			self.text += "Success\n"
 		else:
-			print("Failed")
-		print("-----")
+			self.text += "Failed\n"
+		self.text += "-----\n"
 
 	pass # Replace with function body.
 
@@ -49,10 +51,10 @@ func _process(delta: float) -> void:
 
 var hands = {
 	"Royal Flush": {
-		"hand": ["J♦", "2♦", "3♦", "5♠", "10♦"]
+		"hand": ["10♦", "J♦", "Q♦", "K♦", "A♦"]
 	},
 	"Straight Flush": {
-		"hand": ["2♦", "2♦", "3♦", "5♠", "10♦"]
+		"hand": ["2♦", "3♦", "4♦", "5♦", "6♦"]
 	},
 	"Four of a Kind": {
 		"hand": ["2♦", "2♦", "2♦", "2♠", "10♦"]
@@ -64,7 +66,7 @@ var hands = {
 		"hand": ["2♦", "8♦", "3♦", "5♦", "10♦"]
 	},
 	"Straight": {
-		"hand": ["2♦", "2♦", "3♦", "5♠", "10♦"]
+		"hand": ["2♦", "3♦", "4♦", "5♠", "6♦"]
 	},
 	"Three of a Kind": {
 		"hand": ["2♦", "2♠", "2♣", "5♠", "10♦"]
