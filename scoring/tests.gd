@@ -5,7 +5,9 @@ var suits = ["♦","♠","♥", "♣"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	test_hands()
 	
+func test_hands() -> void:
 	self.text += "Starting Tests\n"
 	
 	for hand in hands:

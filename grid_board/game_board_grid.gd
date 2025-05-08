@@ -63,10 +63,12 @@ func generate_card_for_cell(grid_cell:GridCell) -> void:
 	grid_cell.card = card
 
 func set_active_cell(next_cell:GridCell) -> void:
+	var current_texture = active_cell.texture
+	var next_texture = next_cell.texture
 	next_cell.card = active_card
-	next_cell.load_texture()
+	next_cell.texture = current_texture
 	active_cell.card = null
-	active_cell.load_texture()
+	active_cell.texture = next_texture
 	active_cell = next_cell
 
 # Input Events
