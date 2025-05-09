@@ -1,5 +1,10 @@
 class_name Evaluator extends Node
 
+func slice_hands(array:Array) -> void:
+	var group_size = 5
+	for x in range(0,array.size() - (group_size - 1)):
+		var new_array = array.slice(x,x+group_size)
+		print(new_array)
 func evaluate_hand(hand) -> int:
 	hand.sort_custom(sort_hand_ascending)
 	var value = 0

@@ -6,7 +6,7 @@ class_name GridCell extends TextureRect
 var fstring = "res://cards/pngs/%s.png"
 
 func _ready():
-	self.custom_minimum_size = Vector2(250/3,350/3)
+	self.custom_minimum_size = Vector2(80,116)
 	self.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	self.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 func load_texture() -> void:
