@@ -4,9 +4,12 @@ extends GridContainer
 var active_card:Card
 var active_cell:GridCell
 var grid_array = Array()
+var score:int = 0
+var evaluator:Evaluator
 # Grid array is an array of rows.
 # grid_array[0] is the topmost row
-# grid_array[0][1] is the upper left cell
+# grid_array[0][0] is the upper left cell
+# grid_array[rows-1][columns-1] is lower right cell
 
 # variables used to keep track of game state
 var game_tick_rate = 1 #seconds
@@ -14,6 +17,7 @@ var tick_progress = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	evaluator = Evaluator.new()
 	grid_array.resize(rows)
 	for row in range(rows):
 		var row_array = Array()
@@ -42,8 +46,24 @@ func _process(delta: float) -> void:
 	pass
 
 func check_for_winning_hands() -> void:
+	# Check the rows
 	for row in grid_array:
-		print("check row")
+		var count = row.filter(func(cell): return cell.card != null).size()
+		if count >= 5:
+			evaluator.slice_hands(row)
+	
+	# Check the columns
+	for column in range(columns):
+		var column_array = Array()
+		column_array.resize(rows)
+		for row in range(rows):
+			column_array[row] = grid_array[row][column]
+		var count = column_array.filter(func(cell): return cell.card != null).size()
+		#if count >= 5:
+			#evaluator.slice_hands(column_array)
+
+
+		
 
 func start_new_drop() -> void:
 	check_for_winning_hands()
