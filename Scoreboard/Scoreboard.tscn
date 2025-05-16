@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://ks2i5kyr4wrl"]
+
+[ext_resource type="FontFile" uid="uid://b0agjovssxtrm" path="res://Scoreboard/Doto-VariableFont_ROND,wght.ttf" id="1_dxrc0"]
+[ext_resource type="Script" uid="uid://djmjg4lemeyln" path="res://Scoreboard/scoreboard.gd" id="1_uj5bf"]
+[ext_resource type="Script" uid="uid://b0tns2f0q2paq" path="res://Scoreboard/score_matrix.gd" id="3_50vnw"]
+
+[sub_resource type="FontVariation" id="FontVariation_uj5bf"]
+base_font = ExtResource("1_dxrc0")
+variation_opentype = {
+1380929092: 0,
+2003265652: 900
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_50vnw"]
+font = SubResource("FontVariation_uj5bf")
+font_size = 78
+
+[node name="Scoreboard" type="CenterContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_uj5bf")
+
+[node name="score_matrix" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(900, 100)
+layout_mode = 2
+text = "1,234,555"
+label_settings = SubResource("LabelSettings_50vnw")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_50vnw")

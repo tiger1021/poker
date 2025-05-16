@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvqpmvp1vaqg1"]
+[gd_scene load_steps=4 format=3 uid="uid://dvqpmvp1vaqg1"]
 
 [ext_resource type="Script" uid="uid://cavuxvyn12n2m" path="res://grid_board/game_board_grid.gd" id="1_4uu5y"]
-[ext_resource type="Script" uid="uid://bv0hj0jrijnmv" path="res://grid_board/scoreboard.gd" id="2_lyy8n"]
+[ext_resource type="Script" uid="uid://c4wi363i5no2f" path="res://grid_board/game_board.gd" id="1_5yg5l"]
+[ext_resource type="PackedScene" uid="uid://ks2i5kyr4wrl" path="res://Scoreboard/Scoreboard.tscn" id="3_5yg5l"]
 
 [node name="GameBoardContainer" type="HBoxContainer"]
 anchors_preset = 8
@@ -16,6 +17,7 @@ offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
+script = ExtResource("1_5yg5l")
 
 [node name="GameBoardGrid" type="GridContainer" parent="."]
 custom_minimum_size = Vector2(100, 100)
@@ -24,6 +26,6 @@ size_flags_horizontal = 3
 columns = 9
 script = ExtResource("1_4uu5y")
 
-[node name="Scoreboard" type="RichTextLabel" parent="."]
+[node name="Scoreboard" parent="." instance=ExtResource("3_5yg5l")]
+unique_name_in_owner = true
 layout_mode = 2
-script = ExtResource("2_lyy8n")

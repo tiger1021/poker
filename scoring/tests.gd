@@ -5,15 +5,14 @@ var suits = ["♦","♠","♥", "♣"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	test_slicer()
-	#test_hands()
+	#test_slicer()
+	test_hands()
 
 func test_slicer() -> void:
 	var array = [1,2,3,4,5,6,7,8,9,10]
 	var group_size = 2
 	for x in range(0,array.size() - (group_size - 1)):
 		var new_array = array.slice(x,x+group_size)
-		print(new_array)
 		
 func test_hands() -> void:
 	self.text += "Starting Tests\n"
@@ -23,11 +22,11 @@ func test_hands() -> void:
 		self.text += "\n"
 		self.text += " ".join(hands[hand]["hand"])
 		self.text += "\n"
-		var score = evaluator.evaluate_hand(create_hand_from_text(hands[hand]["hand"]))
-		if (score == evaluator.scoring_table[hand]):
-			self.text += "Success\n"
-		else:
-			self.text += "Failed\n"
+		var scores = evaluator.evaluate_hand(create_hand_from_text(hands[hand]["hand"]))
+		
+		for score in scores:
+			self.text += str(score)
+			self.text += "\n"
 		self.text += "-----\n"
 
 	pass # Replace with function body.
