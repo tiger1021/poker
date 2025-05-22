@@ -25,6 +25,7 @@ func test_hands() -> void:
 		var scores = evaluator.evaluate_hand(create_hand_from_text(hands[hand]["hand"]))
 		
 		for score in scores:
+			print(scores[score])
 			self.text += str(score)
 			self.text += "\n"
 		self.text += "-----\n"

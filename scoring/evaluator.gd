@@ -9,8 +9,8 @@ func slice_hands(array:Array) -> void:
 		for cell in cells:
 			hand.append(cell.card)
 		
-func evaluate_hand(hand) -> Array:
-	var values = Array()
+func evaluate_hand(hand) -> Dictionary:
+	var values = Dictionary()
 	hand.sort_custom(sort_hand_ascending)
 	var valid = true
 	var is_straight = true
@@ -41,18 +41,18 @@ func evaluate_hand(hand) -> Array:
 	
 	if (suits.keys().size() == 1):
 		is_flush = true
-		values.append({"Flush": scoring_table["Flush"]})
+		values = {"Flush": scoring_table["Flush"]}
 	
 	if is_straight == true:
 		if is_flush == true:
 			if (hand[0].value == 10):
-				values.append({"Royal Flush": scoring_table["Royal Flush"]})
+				values = {"Royal Flush": scoring_table["Royal Flush"]}
 
 			else:
-				values.append({"Straight Flush": scoring_table["Straight Flush"]})
+				values = {"Straight Flush": scoring_table["Straight Flush"]}
 
 		else:
-			values.append({"Straight": scoring_table["Straight"]})
+			values = {"Straight": scoring_table["Straight"]}
 	
 	for multiple in multiples.values():
 		if multiple == 2:
@@ -64,20 +64,20 @@ func evaluate_hand(hand) -> Array:
 	
 	if pairs == 1:
 		if triplet == 1:
-			values.append({"Full House": scoring_table["Full House"]})
+			values = {"Full House": scoring_table["Full House"]}
 
 		else:
-			values.append({"One Pair": scoring_table["One Pair"]})
+			values = {"One Pair": scoring_table["One Pair"]}
 
 	elif pairs == 2:
-		values.append({"Two Pair": scoring_table["Two Pair"]})
+		values = {"Two Pair": scoring_table["Two Pair"]}
 
 	else:
 		if triplet == 1:
-			values.append({"Three of a Kind": scoring_table["Three of a Kind"]})
+			values = {"Three of a Kind": scoring_table["Three of a Kind"]}
 
 	if quad == 1:
-		values.append({"Four of a Kind": scoring_table["Four of a Kind"]})
+		values = {"Four of a Kind": scoring_table["Four of a Kind"]}
 	return values
 
 func sort_hand_ascending(a, b):
