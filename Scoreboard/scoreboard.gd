@@ -13,10 +13,12 @@ func add_hands(hands) -> void:
 		scoring_hands_queue.append(hand)
 		
 func process_queue() -> void:
-	var score_matrix:ScoreMatrix = get_node("%score_matrix")
-	for hand in self.scoring_hands_queue:
-		score_matrix.score += hand.score
-		game_board_grid.clear_hand(hand)
+	if self.scoring_hands_queue.size() > 0:
+		self.game_board_grid.processing_queue = true
+		var score_matrix:ScoreMatrix = get_node("%score_matrix")
+		for hand in self.scoring_hands_queue:
+			score_matrix.score += hand.score
+			game_board_grid.clear_hand(hand)
 		
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

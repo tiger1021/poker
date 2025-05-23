@@ -7,6 +7,7 @@ var active_cell:GridCell
 var grid_array = Array()
 var score:int = 0
 var evaluator:Evaluator
+var processing_queue:bool = false
 
 # Grid array is an array of rows.
 # grid_array[0] is the topmost row
@@ -41,10 +42,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	tick_progress += delta
-	if (tick_progress >= game_tick_rate):
-		tick_progress = 0
-		move_down()
+	if processing_queue == false:
+		tick_progress += delta
+		if (tick_progress >= game_tick_rate):
+			tick_progress = 0
+			move_down()
 	pass
 
 func check_for_winning_hands() -> void:
