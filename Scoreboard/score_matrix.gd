@@ -1,4 +1,5 @@
 extends Label
+class_name ScoreMatrix
 
 var rng = RandomNumberGenerator.new()
 

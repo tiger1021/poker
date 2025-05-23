@@ -1,4 +1,5 @@
 extends GridContainer
+class_name GameBoardGrid
 
 @export var rows:int = 8
 var active_card:Card
@@ -6,6 +7,7 @@ var active_cell:GridCell
 var grid_array = Array()
 var score:int = 0
 var evaluator:Evaluator
+
 # Grid array is an array of rows.
 # grid_array[0] is the topmost row
 # grid_array[0][0] is the upper left cell
@@ -46,11 +48,14 @@ func _process(delta: float) -> void:
 	pass
 
 func check_for_winning_hands() -> void:
+	var scoreboard:Scoreboard = get_parent().get_node('%Scoreboard')
+	if scoreboard.game_board_grid == null:
+		scoreboard.game_board_grid = self
 	# Check the rows
 	for row in grid_array:
 		var count = row.filter(func(cell): return cell.card != null).size()
 		if count >= 5:
-			evaluator.slice_hands(row)
+			scoreboard.add_hands(evaluator.evaluate_hands(row))
 	
 	# Check the columns
 	for column in range(columns):
@@ -61,9 +66,13 @@ func check_for_winning_hands() -> void:
 		var count = column_array.filter(func(cell): return cell.card != null).size()
 		#if count >= 5:
 			#evaluator.slice_hands(column_array)
+	scoreboard.process_queue()
 
-
-		
+func clear_hand(hand:Hand) -> void:
+	print("Clear")
+	for grid_cell:GridCell in hand.grid_cells:
+		grid_cell.card = null
+		grid_cell.load_texture()
 
 func start_new_drop() -> void:
 	check_for_winning_hands()

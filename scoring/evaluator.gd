@@ -1,17 +1,30 @@
 class_name Evaluator extends Node
 
-func slice_hands(array:Array) -> void:
+func evaluate_hands(array:Array) -> Array:
+	var hands = Array()
+	var scoring_hands = Array()
 	var group_size = 5
 	for x in range(0,array.size() - (group_size - 1)):
 		var cells = array.slice(x,x+group_size)
-		var hand = Array()
-		hand.resize(group_size)
+		var hand = Hand.new()
 		for cell in cells:
-			hand.append(cell.card)
+			hand.grid_cells.append(cell)
+
+		if self.evaluate_hand(hand).size() > 0:
+			var evaluation = self.evaluate_hand(hand)
+			hand.score = evaluation.values()[0]
+			hand.score_name = evaluation.keys()[0]
+			scoring_hands.append(hand)
+	
+	return scoring_hands
 		
-func evaluate_hand(hand) -> Dictionary:
+		
+func evaluate_hand(hand:Hand) -> Dictionary:
 	var values = Dictionary()
-	hand.sort_custom(sort_hand_ascending)
+	var cards = Array()
+	for cell in hand.grid_cells:
+		cards.append(cell.card)
+	cards.sort_custom(sort_hand_ascending)
 	var valid = true
 	var is_straight = true
 	var is_flush = false
@@ -21,8 +34,8 @@ func evaluate_hand(hand) -> Dictionary:
 	var multiples = {}
 	var suits = {}
 
-	for index in hand.size():
-		var card = hand[index]
+	for index in cards.size():
+		var card = cards[index]
 		if (card==null):
 			is_straight = false
 			valid = false
@@ -34,7 +47,7 @@ func evaluate_hand(hand) -> Dictionary:
 				multiples[card.value] = multiples[card.value] + 1
 			suits[card.suit] = 1
 			if index < 4:
-				if hand[index].value != (hand[index+1].value - 1):
+				if cards[index].value != (cards[index+1].value - 1):
 					is_straight = false
 			
 	#if (valid==false):
@@ -45,7 +58,7 @@ func evaluate_hand(hand) -> Dictionary:
 	
 	if is_straight == true:
 		if is_flush == true:
-			if (hand[0].value == 10):
+			if (cards[0].value == 10):
 				values = {"Royal Flush": scoring_table["Royal Flush"]}
 
 			else:
